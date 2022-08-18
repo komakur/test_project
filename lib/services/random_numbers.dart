@@ -29,7 +29,13 @@ class RandomNumbers {
           '$urlForRandomNumAPI/$dataType/?num=$numbersToGenerate&min=$min&max=$max&col=1&base=10&format=$responseFormat&rnd=new',
     );
     final randomNumbers = await networkHelper.getData();
-
-    return randomNumbers.split(' ').toList().first.split('\n');
+    var res = randomNumbers.split(' ').toList().first.split('\n');
+    res.removeLast();
+    return res;
   }
+
+  /// parse a String of Random Number to an Integer,
+  ///  if parse cant be proceed returns 0
+  int parseRandomNumberString(String stringRandomNumber) =>
+      int.tryParse(stringRandomNumber) ?? 0;
 }

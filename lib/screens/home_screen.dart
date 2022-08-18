@@ -14,10 +14,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Color randomColor = Colors.white;
   Color newTextColor = Colors.black;
+  RandomNumbers randomNumbersService = RandomNumbers();
 
   List<String> randomNumbers = List<String>.empty(growable: true);
   Future generateRandomNumbers() async {
-    randomNumbers = await RandomNumbers().getRandomNumbers();
+    randomNumbers = await randomNumbersService.getRandomNumbers();
   }
 
   @override
@@ -26,10 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () async {
         await generateRandomNumbers();
 
-        final int a = int.tryParse(randomNumbers[0]) ?? 0;
-        final int r = int.tryParse(randomNumbers[1]) ?? 0;
-        final int g = int.tryParse(randomNumbers[2]) ?? 0;
-        final int b = int.tryParse(randomNumbers[3]) ?? 0;
+        final int a =
+            randomNumbersService.parseRandomNumberString(randomNumbers[0]);
+        final int r =
+            randomNumbersService.parseRandomNumberString(randomNumbers[1]);
+        final int g =
+            randomNumbersService.parseRandomNumberString(randomNumbers[2]);
+
+        final int b =
+            randomNumbersService.parseRandomNumberString(randomNumbers[3]);
 
         const int topARGBValue = 255;
         setState(() {
