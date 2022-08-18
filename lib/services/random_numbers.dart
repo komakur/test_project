@@ -29,8 +29,9 @@ class RandomNumbers {
           '$urlForRandomNumAPI/$dataType/?num=$numbersToGenerate&min=$min&max=$max&col=1&base=10&format=$responseFormat&rnd=new',
     );
     final randomNumbers = await networkHelper.getData();
-    var res = randomNumbers.split(' ').toList().first.split('\n');
+    final res = randomNumbers.split(' ').toList().first.split('\n');
     res.removeLast();
+
     return res;
   }
 
